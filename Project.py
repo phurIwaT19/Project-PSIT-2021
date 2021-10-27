@@ -30,5 +30,3 @@ def main():
         draw_board()
     pygame.quit()
 
-    if __name__ == "__main__":
-    main()
