@@ -38,13 +38,11 @@ def draw_board(): # ฟังก์ชั่นสำหรับใส่สี
     pygame.draw.line( screen, LIGHT_PURPLE, (0, 200), (600, 200), 20) #1
     pygame.draw.line( screen, LIGHT_PURPLE, (0, 400), (600, 400), 20) #2
 
-#สร้าง list ของแถวตาราง xo
+#สร้าง list เอาไว้ตรวจสอบการแสดงของสัญลักษณ์ X กับ O ของแต่ละผู้เล่น
 for x in range(3):
     row = [0]*3
     markers.append(row)
-    print(markers)
-#ตารางที่ได้ >> [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-#ตารางนี้จะเอาไว้ตรวจสอบการแสดงของสัญลักษณ์ X กับ O ของแต่ละผู้เล่น
+#list ที่ได้ >> [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
 def draw_markers():
     x_pos = 0
@@ -62,8 +60,8 @@ def draw_markers():
 run = True
 # สร้าง whileloop เพื่อให้ code รันต่อเนื่อง
 while run:
-    draw_board()
-    draw_markers()
+    draw_board()#เรียกใช้ฟังก์ชันสำหรับแสดงบอร์ดของเกม
+    draw_markers()#
     for event in pygame.event.get():#ใช้ forloop ในการเช็คดูเหตุการณ์ต่างๆที่เกิดขึ้นภายในเกม
         if event.type == pygame.QUIT:# หากมีการกดปิดเกมให้สั่งปิด (โดยการให้ออกจาก while loop)
             run = False
@@ -74,12 +72,12 @@ while run:
         if event.type == pygame.MOUSEBUTTONUP and clicked == True:
             clicked = False #reset รอบการคลิกเมาส์
             position = pygame.mouse.get_pos()#เก็บค่าตำแหน่งของจุดที่คลิกเมาส์ในรูปแบบ (x, y)
-            mark_x = position[0]#เก็บค่าตำแหน่ง x ของจุดที่คลิก
-            mark_y = position[1]#เก็บค่าตำแหน่ง y ของจุดที่คลิก
-            #
-            if markers[mark_x // 200][mark_y // 200] == 0:
-                markers[mark_x // 200][mark_y // 200] = player
-                player *= -1
+            mark_x = position[0] #เก็บค่าตำแหน่ง x ของจุดที่คลิก
+            mark_y = position[1] #เก็บค่าตำแหน่ง y ของจุดที่คลิก
+            #เช็คตำแหน่งว่าตำแหน่งนั้นถูกคลิกไปหรือยัง
+            if markers[mark_x // 200][mark_y // 200] == 0: #หากเป็น 0 คือยังไม่ถูกคลิก
+                markers[mark_x // 200][mark_y // 200] = player #เปลี่ยนสถานนะว่าตำแหน่งนั้นถูกคลิกแล้ว
+                player *= -1 #เปลี่ยนสถานะจาก 1 เป็น -1 และจาก -1 เป็น 1 เพื่อนำไปใช้ในเงื่อนไขของฟังก์ชั่น draw_markers()
 
     pygame.display.update()#อัพเดทสิ่งที่ใส่เข้าไปจากโค้ดไปยังหน้าจอแสดงผล
 pygame.quit()#คำสั่งปิดการทำงานของ pygame
