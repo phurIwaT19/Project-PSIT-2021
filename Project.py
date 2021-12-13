@@ -96,7 +96,10 @@ def draw_manu(winner):
     text_playagain = (32, 36, 154)
     box_playagain = (250, 227, 132)
     if game_over == True:
-        win_text = 'Player ' + str(winner) + " wins!"
+        if playTwoPlayer == False and winner == 2:
+            win_text = '     AI wins!'
+        else:
+            win_text = 'Player ' + str(winner) + " wins!"
     elif draw == True and game_over != True:
         win_text = "      DRAW!!!"
     elif game_over != True and manu == True:
